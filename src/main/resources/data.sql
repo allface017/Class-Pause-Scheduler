@@ -1,8 +1,15 @@
-INSERT INTO albums (title, artist, release_date) VALUES
-                                                     ('Hello World', 'Aurora Beats', '2021-08-20'),
-                                                     ('Strings of Serenity', 'Harmony Collective', '2020-11-10'),
-                                                     ('Cosmic Vibes', 'Galaxy Harmonics', '2024-01-18');
-INSERT INTO musics (title, duration, album_id) VALUES
-                                                   ('Sunset', '00:03:45', 1),
-                                                   ('Moonlight', '00:04:12', 1),
-                                                   ('Eternal Memories', '00:05:45', 2);
+INSERT INTO subjects (id,name)
+VALUES
+    (1, 'テスト基礎'),
+    (2, 'AWS基礎'),
+    (3, 'DevOps');
+INSERT INTO class_pause
+    (id, subject_id, date,
+    period,type, substitute_date,
+    substitute_period,remarks)
+VALUES
+    (1, 1, '2024-06-10', 1, '休講', '2024-06-17', NULL, '担当教員体調不良'),
+    (2, 2, '2024-06-11', 2, '補講', '2024-06-18', 2, '補講日程調整済み'),
+    (3, 3, '2024-06-12', 3, '休講', '2024-06-19', NULL, '会議のため休講'),
+    (4, 1, '2024-06-13', 4, '補講', '2024-06-20', 4, '補講日程確定'),
+    (5, 2, '2024-06-14', 5, '休講', '2024-06-21', NULL, 'その他理由');

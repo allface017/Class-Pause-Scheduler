@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -45,6 +46,13 @@ public class HomeController {
     @PostMapping("/classpause/new")
     public String submitClassPause(@ModelAttribute ClassPause classPause) {
         classPauseService.insertClassPause(classPause);
+        return "redirect:/";
+    }
+
+    // 休講情報一括登録処理
+    @PostMapping("/classpause/bulk")
+    public String bulkSubmitClassPause(@RequestParam("bulkData") String bulkData) {
+        classPauseService.bulkInsertClassPause(bulkData);
         return "redirect:/";
     }
 }

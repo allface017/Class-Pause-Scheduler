@@ -7,6 +7,10 @@ import com.example.classpausescheduler.service.SubjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -28,5 +32,27 @@ public class HomeController {
         model.addAttribute("subjects", subjects);
         model.addAttribute("class_pauses", class_pauses);
         return "Home/index";
+    }
+
+    // 休講情報登録画面表示
+    @GetMapping("/classpause/new")
+    public String showClassPauseForm(Model model) {
+        model.addAttribute("classPause", new ClassPause());
+        model.addAttribute("subjects", subjectService.getAllSubject());
+        return "Home/classpause_form";
+    }
+
+    // 休講情報登録処理
+    @PostMapping("/classpause/new")
+    public String submitClassPause(@ModelAttribute ClassPause classPause) {
+        classPauseService.insertClassPause(classPause);
+        return "redirect:/";
+    }
+
+    // 休講情報一括登録処理
+    @PostMapping("/classpause/bulk")
+    public String bulkSubmitClassPause(@RequestParam("bulkData") String bulkData) {
+        classPauseService.bulkInsertClassPause(bulkData);
+        return "redirect:/";
     }
 }

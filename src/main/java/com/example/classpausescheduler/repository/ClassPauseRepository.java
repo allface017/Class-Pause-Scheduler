@@ -18,4 +18,9 @@ public class ClassPauseRepository {
     public List<ClassPause> getAllClassPause() {
         return classPauseMapper.selectAllclasspause();
     }
+
+    // 休講情報の登録
+    public void insertClassPause(ClassPause classPause) {
+        classPauseMapper.insertClassPause(classPause);
+    }
 }

@@ -10,42 +10,91 @@
 <body>
 <div class="container mt-5">
     <h2 class="mb-4">休講情報登録</h2>
-    <form th:action="@{/classpause/new}" th:object="${classPause}" method="post" class="row g-3">
-        <div class="col-md-6">
-            <label class="form-label">科目：</label>
-            <select th:field="*{subjectId}" class="form-select" required>
-                <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
-            </select>
+
+    <!-- タブナビゲーション -->
+    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="single-tab" data-bs-toggle="tab" data-bs-target="#single-form"
+                type="button" role="tab" aria-controls="single-form" aria-selected="true">個別登録</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="bulk-tab" data-bs-toggle="tab" data-bs-target="#bulk-form"
+                type="button" role="tab" aria-controls="bulk-form" aria-selected="false">一括登録</button>
+        </li>
+    </ul>
+
+    <!-- タブコンテンツ -->
+    <div class="tab-content" id="myTabContent">
+        <!-- 個別登録フォーム -->
+        <div class="tab-pane fade show active" id="single-form" role="tabpanel" aria-labelledby="single-tab">
+            <form th:action="@{/classpause/new}" th:object="${classPause}" method="post" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">科目：</label>
+                    <select th:field="*{subjectId}" class="form-select" required>
+                        <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">日付：</label>
+                    <input type="date" th:field="*{date}" class="form-control" required/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">時限：</label>
+                    <input type="number" th:field="*{period}" min="1" max="10" class="form-control" required/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">種別：</label>
+                    <input type="text" th:field="*{type}" class="form-control" required/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">補講日：</label>
+                    <input type="date" th:field="*{substitute_date}" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">補講時限：</label>
+                    <input type="number" th:field="*{substitute_period}" min="1" max="10" class="form-control"/>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">備考：</label>
+                    <input type="text" th:field="*{remarks}" class="form-control"/>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">登録</button>
+                    <a th:href="@{/}" class="btn btn-secondary btn-lg ms-3 px-5">戻る</a>
+                </div>
+            </form>
         </div>
-        <div class="col-md-6">
-            <label class="form-label">日付：</label>
-            <input type="date" th:field="*{date}" class="form-control" required/>
+
+        <!-- 一括登録フォーム -->
+        <div class="tab-pane fade" id="bulk-form" role="tabpanel" aria-labelledby="bulk-tab">
+            <form th:action="@{/classpause/bulk}" method="post" class="row g-3">
+                <div class="col-12 mb-3">
+                    <label class="form-label">休講情報テキスト：</label>
+                    <textarea name="bulkData" class="form-control" rows="15" required
+                        placeholder="例：&#10;-------------------------------------&#10;科目名：テスト基礎&#10;対象日：&#10;5/7(水) 1限&#10;5/8(木) 2限&#10;振替日：&#10;5/29(木) 4限&#10;6/5(木) 4限"></textarea>
+                </div>
+                <div class="col-12">
+                    <p class="text-muted small">
+                        フォーマット:<br>
+                        -------------------------------------<br>
+                        科目名：[科目名]<br>
+                        対象日：<br>
+                        [月]/[日]([曜日]) [時限]限<br>
+                        ...<br>
+                        振替日：<br>
+                        [月]/[日]([曜日]) [時限]限<br>
+                        ...<br>
+                        -------------------------------------
+                    </p>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">一括登録</button>
+                    <a th:href="@{/}" class="btn btn-secondary btn-lg ms-3 px-5">戻る</a>
+                </div>
+            </form>
         </div>
-        <div class="col-md-6">
-            <label class="form-label">時限：</label>
-            <input type="number" th:field="*{period}" min="1" max="10" class="form-control" required/>
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">種別：</label>
-            <input type="text" th:field="*{type}" class="form-control" required/>
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">補講日：</label>
-            <input type="date" th:field="*{substitute_date}" class="form-control"/>
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">補講時限：</label>
-            <input type="number" th:field="*{substitute_period}" min="1" max="10" class="form-control"/>
-        </div>
-        <div class="col-12">
-            <label class="form-label">備考：</label>
-            <input type="text" th:field="*{remarks}" class="form-control"/>
-        </div>
-        <div class="col-12 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary btn-lg px-5">登録</button>
-            <a th:href="@{/}" class="btn btn-secondary btn-lg ms-3 px-5">戻る</a>
-        </div>
-    </form>
+    </div>
 </div>
 </body>
 </html>
+

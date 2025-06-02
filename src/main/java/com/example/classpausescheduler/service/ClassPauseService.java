@@ -18,4 +18,9 @@ public class ClassPauseService {
     public List<ClassPause> getAllClassPause() {
         return classPauseRepository.getAllClassPause();
     }
+
+    // 休講情報の登録
+    public void insertClassPause(ClassPause classPause) {
+        classPauseRepository.insertClassPause(classPause);
+    }
 }

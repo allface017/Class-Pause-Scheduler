@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>休講情報登録</title>
+</head>
+<body>
+<h2>休講情報登録</h2>
+<form th:action="@{/classpause/new}" th:object="${classPause}" method="post">
+    <label>科目：</label>
+    <select th:field="*{subjectId}" required>
+        <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+    </select><br/>
+    <label>日付：</label>
+    <input type="date" th:field="*{date}" required/><br/>
+    <label>時限：</label>
+    <input type="number" th:field="*{period}" min="1" max="10" required/><br/>
+    <label>種別：</label>
+    <input type="text" th:field="*{type}" required/><br/>
+    <label>補講日：</label>
+    <input type="date" th:field="*{substitute_date}"/><br/>
+    <label>補講時限：</label>
+    <input type="number" th:field="*{substitute_period}" min="1" max="10"/><br/>
+    <label>備考：</label>
+    <input type="text" th:field="*{remarks}"/><br/>
+    <button type="submit">登録</button>
+</form>
+<a th:href="@{/}">戻る</a>
+</body>
+</html>
+

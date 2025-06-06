@@ -34,6 +34,14 @@ public class HomeController {
         return "Home/index";
     }
 
+    /**
+     * カレンダー表示画面に遷移するメソッド
+     */
+    @GetMapping("/calendar")
+    public String calendar(Model model) {
+        return "Home/calendar";
+    }
+
     // 休講情報登録画面表示
     @GetMapping("/classpause/new")
     public String showClassPauseForm(Model model) {

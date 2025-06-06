@@ -5,10 +5,7 @@ import com.example.classpausescheduler.entity.Subject;
 import com.example.classpausescheduler.service.ClassPauseService;
 import com.example.classpausescheduler.service.SubjectService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
